@@ -32,7 +32,7 @@ public class PetTest {
     }
 
     @BeforeMethod
-    public void setupTest(){
+    public void setupPetActions(){
         petActions.set(new PetActions());
     }
 
@@ -66,17 +66,18 @@ public class PetTest {
     public void updatePetByIdWithQueryPram(){
         Faker faker = new Faker();
         String editedPetName = faker.animal().name();
+        String editedPetStatus = PetStatus.SOLD;
 
         Pet pet = petActions.get().createPet();
 
         Assert.assertEquals(pet.getId(), petActions.get().getId());
         Assert.assertEquals(pet.getName(), pet.getName());
 
-        petApi.updatePet(pet.getId(), editedPetName, PetStatus.SOLD);
+        petApi.updatePet(pet.getId(), editedPetName, editedPetStatus);
 
         Pet petById = petApi.getPetById(pet.getId()).as(Pet.class);
         Assert.assertEquals(petById.getName(), editedPetName);
-        Assert.assertEquals(petById.getStatus(), PetStatus.SOLD);
+        Assert.assertEquals(petById.getStatus(), editedPetStatus);
     }
 
     @Test
