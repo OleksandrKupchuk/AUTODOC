@@ -59,6 +59,7 @@ public class PetTest {
         Assert.assertEquals(pet.getName(), petActions.get().getName());
 
         Pet petById = petApi.getPetById(pet.getId()).as(Pet.class);
+        Assert.assertEquals(petById.getId(), petActions.get().getId());
         Assert.assertEquals(petById.getStatus(), PetStatus.AVAILABLE);
     }
 
